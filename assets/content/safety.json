@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "status": "draft_needs_expert_review",
+  "note": "이 파일의 문구와 기준값은 정신건강 전문가 검토 후 확정한다. 연락처와 기준값은 Remote Config로 덮어쓸 수 있게 구현한다.",
+  "disclaimer": {
+    "lintExempt": true,
+    "title": "시작하기 전에",
+    "text": "HealingPianta는 일상 속 작은 돌봄을 돕는 셀프케어 앱이에요. 의료 서비스가 아니며 진단이나 치료를 대신하지 않아요. 마음이 많이 힘들거나 일상생활이 어렵다면 정신건강의학과 전문의나 전문 상담 기관과 이야기해 주세요.",
+    "confirmLabel": "알겠어요"
+  },
+  "ageGate": {
+    "minAge": 19,
+    "title": "성인을 위한 앱이에요",
+    "text": "HealingPianta는 만 19세 이상을 위한 앱이에요. 지금 마음이 힘들다면 109에 전화하거나 문자로 언제든 이야기할 수 있어요."
+  },
+  "consents": {
+    "sensitive": {
+      "title": "민감정보 처리 동의 (필수)",
+      "text": "기분·에너지 기록과 메모는 건강과 관련된 민감한 정보예요. 이 정보는 행동 제안, 기록, 리포트 같은 앱 기능에만 쓰이고 광고나 다른 목적에는 쓰이지 않아요. 설정에서 언제든 데이터를 내보내거나 계정과 함께 삭제할 수 있어요."
+    },
+    "photo": {
+      "title": "새싹 사진 안내",
+      "text": "새싹 사진은 성장 상태를 확인하기 위해 AI 분석 서비스(OpenAI)로 전송되고, 앨범 보관을 위해 서버에 저장돼요. 사람 얼굴이나 개인 정보가 찍히지 않게 새싹만 보이게 찍어주세요."
+    }
+  },
+  "cameraHint": "새싹만 화면에 들어오게 찍어주세요",
+  "helpScreen": {
+    "title": "지금 이야기할 곳이 있어요",
+    "text": "혼자 버티지 않아도 돼요. 편한 방법을 하나 골라보세요.",
+    "contacts": [
+      {
+        "id": "suicide_prevention_109",
+        "label": "자살예방상담전화 109",
+        "description": "마음이 힘들 때 24시간 전화할 수 있어요.",
+        "action": "tel",
+        "value": "109"
+      },
+      {
+        "id": "madlan",
+        "label": "마들랜 (SNS 상담)",
+        "description": "전화가 어렵다면 문자나 메신저로 이야기할 수 있어요.",
+        "action": "url",
+        "value": "https://www.129.go.kr/109/etc/madlan",
+        "verifyBeforeRelease": true
+      },
+      {
+        "id": "emergency_119",
+        "label": "긴급 상황 119",
+        "description": "지금 바로 위험하다면 119에 연락하세요.",
+        "action": "tel",
+        "value": "119"
+      }
+    ],
+    "remoteConfigKey": "crisis_contacts"
+  },
+  "supportMode": {
+    "status": "needs_expert_review",
+    "remoteConfigKey": "support_mode_rules",
+    "enter": {
+      "consecutiveMoodOne": 3,
+      "lowMoodWindow": 5,
+      "lowMoodThreshold": 2,
+      "lowMoodCount": 4,
+      "keywordDetection": true
+    },
+    "exit": {
+      "userSelfReport": true,
+      "selfReportLabel": "조금 괜찮아졌어요",
+      "moodAtLeast": 3,
+      "requiredCount": 2
+    },
+    "behavior": {
+      "hideActionSuggestions": true,
+      "stopActivationNotifications": true,
+      "dailySupportCheckins": 1,
+      "showHelpCardOnHome": true,
+      "muteFriendNotifications": true
+    }
+  },
+  "crisisKeywords": {
+    "status": "needs_expert_review",
+    "note": "메모 입력 시 기기 안에서만 검사한다. 원문을 서버, 분석 도구, 로그로 보내지 않는다. 감지되면 경고 톤 없이 도움받기 화면을 부드럽게 띄운다.",
+    "keywords": ["죽고 싶", "죽고싶", "자살", "자해", "사라지고 싶", "사라지고싶", "끝내고 싶", "끝내고싶", "살기 싫", "살기싫", "없어지고 싶", "죽을래"]
+  },
+  "keywordDetectedSheet": {
+    "title": "많이 힘든 마음이 느껴져요",
+    "text": "적어줘서 고마워요. 지금 이야기할 수 있는 곳을 알려드릴게요.",
+    "primaryLabel": "도움받을 곳 보기",
+    "secondaryLabel": "괜찮아요, 닫을게요"
+  },
+  "coupangDisclosure": "이 페이지의 링크는 쿠팡 파트너스 활동의 일환으로, 구매 시 일정액의 수수료를 제공받을 수 있어요.",
+  "forbiddenCopy": {
+    "note": "tool/lint_copy.dart가 사용한다. scanFields에 해당하는 값만 검사하고, lintExempt가 true인 객체는 건너뛴다.",
+    "scanFields": ["text", "title", "body", "message", "description", "steps", "defaultTip", "label", "confirmLabel", "primaryLabel", "secondaryLabel", "selfReportLabel"],
+    "words": ["치료", "진단", "처방", "완치", "낫는다", "나을 거", "효과 보장", "왜 안 왔", "놓쳤", "실망", "죽었", "연속", "스트릭", "해야 해요", "해야 돼요"],
+    "lockScreenWords": ["우울", "기분", "위기", "상담", "자살", "자해", "힘들", "죽"],
+    "lockScreenScope": "messages.json의 notifications 전체와 홈 위젯 문구"
+  }
+}

@@ -1,0 +1,77 @@
+# ---- 비밀 정보 (절대 커밋하지 않음) ----
+.env
+.env.*
+*.env
+*.pem
+*.p12
+*.jks
+*.keystore
+key.properties
+service-account*.json
+*-service-account.json
+firebase-adminsdk*.json
+.runtimeconfig.json
+functions/.secret.local
+functions/.env*
+# google-services.json / firebase_options.dart 는 비밀 키가 아니므로 커밋해도 된다(CLAUDE.md 1-6).
+
+# ---- Flutter / Dart ----
+.dart_tool/
+.packages
+.pub-cache/
+.pub/
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+*.iml
+*.ipr
+*.iws
+.idea/
+coverage/
+**/doc/api/
+.metadata.bak
+
+# ---- Android ----
+android/.gradle/
+android/captures/
+android/local.properties
+android/**/GeneratedPluginRegistrant.java
+android/app/debug
+android/app/profile
+android/app/release
+android/.kotlin/
+
+# ---- iOS ----
+ios/Pods/
+ios/.symlinks/
+ios/Flutter/Generated.xcconfig
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/ephemeral/
+ios/Runner/GeneratedPluginRegistrant.*
+**/xcuserdata/
+
+# ---- Python (Cloud Functions) ----
+__pycache__/
+*.pyc
+.pytest_cache/
+venv/
+.venv/
+functions/venv/
+
+# ---- Node (보안 규칙 테스트) ----
+node_modules/
+
+# ---- Firebase ----
+.firebase/
+firebase-debug.log*
+firestore-debug.log*
+storage-debug.log*
+ui-debug.log*
+database-debug.log*
+pubsub-debug.log*
+
+# ---- OS / 에디터 ----
+.DS_Store
+Thumbs.db
+.vscode/
+*.log

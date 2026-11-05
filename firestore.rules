@@ -1,0 +1,113 @@
+rules_version = '2';
+
+// HealingPianta Firestore 보안 규칙 (초안, CLAUDE.md 1-7 / 4절)
+// - 사용자는 자기 데이터(users/{uid} 아래)만 읽고 쓴다.
+// - AI 판독 결과(analysis, displayStage)와 사용량(usage)은 서버(Admin SDK)만 쓴다.
+//   Admin SDK는 이 규칙을 거치지 않으므로 여기서는 클라이언트 쓰기만 막으면 된다.
+// - 목록에 없는 컬렉션은 기본 거부.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+
+    // 쓰기 요청이 바꾸는 필드
+    function changedKeys() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    // ---- 사용자 문서 ----
+    match /users/{uid} {
+      allow read, delete: if isOwner(uid);
+      allow create: if isOwner(uid) && validUser();
+      allow update: if isOwner(uid) && validUser() && notDecreasing('careDaysTotal') && notDecreasing('level');
+
+      function validUser() {
+        let d = request.resource.data;
+        return (!('birthYear' in d) || (d.birthYear is int && d.birthYear >= 1900 && d.birthYear <= 2100))
+          && (!('careDaysTotal' in d) || (d.careDaysTotal is int && d.careDaysTotal >= 0))
+          && (!('level' in d) || (d.level is int && d.level >= 1));
+      }
+
+      // 누적 돌본 날(6.6)과 레벨(6.8)은 줄어들지 않는다.
+      function notDecreasing(field) {
+        return !(field in resource.data)
+          || (field in request.resource.data && request.resource.data[field] >= resource.data[field]);
+      }
+    }
+
+    // ---- 식물 ----
+    match /users/{uid}/plants/{plantId} {
+      allow read, write: if isOwner(uid);
+
+      // 사진: analysis / displayStage / analysisStatus 결과값은 서버만 쓴다.
+      match /photos/{photoId} {
+        allow read, delete: if isOwner(uid);
+        allow create: if isOwner(uid)
+          && !('analysis' in request.resource.data)
+          && !('displayStage' in request.resource.data)
+          && request.resource.data.get('analysisStatus', 'pending') == 'pending';
+        // 클라이언트는 메모와 그때 기분만 고칠 수 있다.
+        allow update: if isOwner(uid)
+          && changedKeys().hasOnly(['note', 'moodAtTime']);
+      }
+    }
+
+    // ---- 기록 ----
+    match /users/{uid}/checkins/{date} {
+      allow read, write: if isOwner(uid);
+    }
+    match /users/{uid}/actions/{actionId} {
+      allow read, write: if isOwner(uid);
+    }
+    match /users/{uid}/messageLog/{id} {
+      allow read, write: if isOwner(uid);
+    }
+    match /users/{uid}/notifLog/{id} {
+      allow read, write: if isOwner(uid);
+    }
+
+    // ---- 사용량 카운터: 읽기만 ----
+    match /users/{uid}/usage/{date} {
+      allow read: if isOwner(uid);
+      allow write: if false;
+    }
+
+    // ---- 새싹 친구 (Phase 15 초안) ----
+    // 그룹 생성·가입·탈퇴는 초대 코드 검증 때문에 서버 함수로만 한다.
+    match /groups/{groupId} {
+      function isMember() {
+        return signedIn() && request.auth.uid in get(/databases/$(database)/documents/groups/$(groupId)).data.memberUids;
+      }
+
+      allow read: if signedIn() && request.auth.uid in resource.data.memberUids;
+      allow write: if false;
+
+      // 모형 스냅샷과 날짜만. 사진·텍스트 필드는 받지 않는다.
+      match /feed/{id} {
+        allow read: if isMember();
+        allow create: if isMember()
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.keys().hasOnly(['uid', 'sproutSnapshot', 'dayIndex', 'createdAt']);
+        allow delete: if isMember() && resource.data.uid == request.auth.uid;
+        allow update: if false;
+      }
+
+      // 반응 3종만.
+      match /reactions/{id} {
+        allow read: if isMember();
+        allow create: if isMember()
+          && request.resource.data.fromUid == request.auth.uid
+          && request.resource.data.type in ['water', 'sun', 'sprout']
+          && request.resource.data.keys().hasOnly(['fromUid', 'toFeedId', 'type', 'createdAt']);
+        allow delete: if isMember() && resource.data.fromUid == request.auth.uid;
+        allow update: if false;
+      }
+    }
+  }
+}

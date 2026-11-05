@@ -1,0 +1,109 @@
+{
+  "version": 1,
+  "note": "레벨업은 조건을 채우면 제안만 하고 사용자가 수락해야 올라간다. 레벨 다운은 없다. implemented가 false인 레벨은 잠긴 미리보기 카드로만 보여준다.",
+  "levels": [
+    {
+      "level": 1,
+      "id": "sprouts",
+      "title": "새싹 친구",
+      "plants": ["radish", "red_radish", "broccoli", "dachae", "bokchoy", "other"],
+      "skills": ["물 갈기", "싹 관찰하기", "수확하기"],
+      "behaviors": ["하루 한 번 새싹 앞에 가기", "물 한 컵 마시기"],
+      "durationNote": "한 번 키우는 데 약 1주, 2주면 두 번 수확할 수 있어요.",
+      "suggestNextWhen": { "harvestCount": 2, "orCareDays": 14 },
+      "season": "all",
+      "implemented": true
+    },
+    {
+      "level": 2,
+      "id": "pothos_water",
+      "title": "물의 친구",
+      "plants": ["pothos_water"],
+      "plantLabel": "스킨답서스 물꽂이",
+      "skills": ["일주일에 한 번 물 갈기", "뿌리 자라는 것 관찰하기"],
+      "behaviors": ["기상 시간 정하기"],
+      "durationNote": "유리병 속에서 뿌리가 자라는 게 보여요. 물만 있으면 잘 버텨요.",
+      "suggestNextWhen": { "careDaysSinceLevel": 21 },
+      "season": "all",
+      "implemented": true,
+      "profile": {
+        "stages": ["cutting", "root_nub", "roots_1cm", "roots_3cm", "new_leaf", "ready_to_pot"],
+        "stageWeeks": { "cutting": 0, "root_nub": 1, "roots_1cm": 2, "roots_3cm": 4, "new_leaf": 6, "ready_to_pot": 8 },
+        "normalLook": "초록 잎과 줄기, 물속에 하얀 뿌리가 자란다. 물이 탁해지면 갈아준다.",
+        "skin": { "stem": "#7FB069", "leaf": "#4E9A4F", "leafShape": "heart_large", "vessel": "glass" },
+        "defaultTip": "물이 탁해지면 갈아주세요. 일주일에 한 번이면 충분해요."
+      }
+    },
+    {
+      "level": 3,
+      "id": "snake_plant",
+      "title": "흙의 친구",
+      "plants": ["stuckyi", "sansevieria"],
+      "plantLabel": "스투키, 산세베리아",
+      "skills": ["손가락으로 흙 마름 확인하기", "물 덜 주기"],
+      "behaviors": ["물 한 컵 마시기를 하루 루틴으로"],
+      "durationNote": "물을 자주 주면 오히려 힘들어하는 식물이에요. 쉬는 것도 돌봄이라는 걸 배워요.",
+      "suggestNextWhen": { "careDaysSinceLevel": 28 },
+      "season": "all",
+      "implemented": false
+    },
+    {
+      "level": 4,
+      "id": "herbs",
+      "title": "수확 친구",
+      "plants": ["basil", "mint"],
+      "plantLabel": "바질, 허브",
+      "skills": ["매일 빛과 물 관리", "순지르기"],
+      "behaviors": ["수확해서 한 끼 차려 먹기"],
+      "durationNote": "잎을 따서 요리에 쓸 수 있어요.",
+      "suggestNextWhen": { "careDaysSinceLevel": 28 },
+      "season": "all",
+      "implemented": false
+    },
+    {
+      "level": 5,
+      "id": "flowers",
+      "title": "꽃 친구",
+      "plants": ["kalanchoe", "geranium"],
+      "plantLabel": "칼랑코에, 제라늄",
+      "skills": ["비료 주기", "시든 꽃 따기", "빛 조절하기"],
+      "behaviors": ["5~10분 산책", "작은 루틴 2개 유지"],
+      "durationNote": "꽃이 피는 걸 보는 단계예요.",
+      "suggestNextWhen": { "careDaysSinceLevel": 42 },
+      "season": "all",
+      "implemented": false
+    },
+    {
+      "level": 6,
+      "id": "fruits",
+      "title": "열매 친구",
+      "plants": ["cherry_tomato", "strawberry"],
+      "plantLabel": "방울토마토, 딸기",
+      "skills": ["지지대 세우기", "꽃가루 옮기기"],
+      "behaviors": ["일주일 목표 세우기"],
+      "durationNote": "두세 달에 걸쳐 열매를 맺어요. 숙련자도 실패할 수 있는 식물이에요.",
+      "suggestNextWhen": { "careDaysSinceLevel": 60 },
+      "season": "spring_summer",
+      "seasonStartMonths": [3, 4, 5, 6],
+      "implemented": false
+    },
+    {
+      "level": 7,
+      "id": "propagation",
+      "title": "마스터: 나누는 정원",
+      "plants": ["any_cutting"],
+      "plantLabel": "키운 식물 번식하기",
+      "skills": ["줄기 잘라 새 식물 만들기"],
+      "behaviors": ["누군가에게 식물 선물하기", "새 사용자 응원하기"],
+      "durationNote": "키운 식물을 나누면서 정원이 다른 사람에게로 이어져요.",
+      "season": "all",
+      "implemented": false
+    }
+  ],
+  "skillTree": ["물 갈기", "싹 관찰하기", "수확하기", "뿌리 관찰하기", "흙 마름 확인하기", "순지르기", "비료 주기", "지지대 세우기", "번식하기"],
+  "gardenStages": [
+    { "fromLevel": 1, "id": "windowsill", "label": "창가" },
+    { "fromLevel": 3, "id": "balcony", "label": "베란다" },
+    { "fromLevel": 5, "id": "yard", "label": "작은 마당" }
+  ]
+}

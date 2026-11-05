@@ -1,0 +1,105 @@
+{
+  "version": 1,
+  "note": "수확까지 걸리는 날과 키는 대략적인 값이다. 추천 키트 설명서를 기준으로 보정한다.",
+  "stages": [
+    { "id": "seed", "index": 0, "label": "씨앗", "description": "씨앗을 뿌린 상태" },
+    { "id": "root", "index": 1, "label": "뿌리 나옴", "description": "씨앗에서 하얀 뿌리가 보임" },
+    { "id": "sprout", "index": 2, "label": "싹 틈", "description": "줄기가 올라오고 떡잎이 닫혀 있음" },
+    { "id": "cotyledon_open", "index": 3, "label": "떡잎 벌어짐", "description": "떡잎 두 장이 벌어짐" },
+    { "id": "harvest_ready", "index": 4, "label": "수확 적기", "description": "떡잎이 다 펴지고 먹기 좋은 키" },
+    { "id": "overgrown", "index": 5, "label": "수확 시기 지남", "description": "웃자라거나 본잎이 나기 시작함" }
+  ],
+  "species": [
+    {
+      "id": "radish",
+      "label": "무순",
+      "family": "brassica",
+      "stageDays": { "seed": 0, "root": 1, "sprout": 2, "cotyledon_open": 3, "harvest_ready": 5, "overgrown": 9 },
+      "harvestHeightCm": [5, 7],
+      "normalLook": "흰색 또는 연두색 줄기, 하트 모양의 초록 떡잎. 뿌리 쪽에 하얀 솜털 같은 뿌리털이 생기는 것은 정상이다.",
+      "skin": { "stem": "#EEF5E1", "leaf": "#7CC36A", "leafShape": "heart" },
+      "defaultTip": "하루 1~2번 물을 갈아주면 깨끗하게 자라요."
+    },
+    {
+      "id": "red_radish",
+      "label": "적무순",
+      "family": "brassica",
+      "stageDays": { "seed": 0, "root": 1, "sprout": 2, "cotyledon_open": 3, "harvest_ready": 5, "overgrown": 9 },
+      "harvestHeightCm": [5, 7],
+      "normalLook": "보라색 또는 붉은 줄기와 초록·자주빛 떡잎. 줄기가 보라색인 것은 정상이다.",
+      "skin": { "stem": "#B9608F", "leaf": "#6FAE5E", "leafShape": "heart" },
+      "defaultTip": "보라색 줄기는 건강하다는 표시예요."
+    },
+    {
+      "id": "broccoli",
+      "label": "브로콜리 새싹",
+      "family": "brassica",
+      "stageDays": { "seed": 0, "root": 1, "sprout": 2, "cotyledon_open": 4, "harvest_ready": 6, "overgrown": 10 },
+      "harvestHeightCm": [3, 5],
+      "normalLook": "연두색 가는 줄기와 진한 초록 떡잎. 키가 작고 촘촘하게 자란다.",
+      "skin": { "stem": "#E3EFCF", "leaf": "#4F9D4A", "leafShape": "heart" },
+      "defaultTip": "햇빛을 조금 보여주면 떡잎이 더 진해져요."
+    },
+    {
+      "id": "dachae",
+      "label": "다채 새싹",
+      "family": "brassica",
+      "stageDays": { "seed": 0, "root": 1, "sprout": 2, "cotyledon_open": 3, "harvest_ready": 5, "overgrown": 9 },
+      "harvestHeightCm": [3, 5],
+      "normalLook": "연두색 줄기와 둥근 초록 떡잎.",
+      "skin": { "stem": "#E6F0D6", "leaf": "#5FAE55", "leafShape": "round" },
+      "defaultTip": "흙이나 솜이 마르지 않게만 봐주세요."
+    },
+    {
+      "id": "bokchoy",
+      "label": "청경채 새싹",
+      "family": "brassica",
+      "stageDays": { "seed": 0, "root": 1, "sprout": 2, "cotyledon_open": 3, "harvest_ready": 5, "overgrown": 9 },
+      "harvestHeightCm": [3, 5],
+      "normalLook": "연두색 줄기와 밝은 초록 떡잎.",
+      "skin": { "stem": "#E9F3DA", "leaf": "#6CBB5E", "leafShape": "round" },
+      "defaultTip": "창가에 두면 줄기가 덜 휘어요."
+    },
+    {
+      "id": "other",
+      "label": "기타 새싹",
+      "family": "unknown",
+      "stageDays": { "seed": 0, "root": 2, "sprout": 3, "cotyledon_open": 5, "harvest_ready": 7, "overgrown": 12 },
+      "harvestHeightCm": [3, 8],
+      "normalLook": "종류를 알 수 없음. 일반적인 새싹 기준으로 판단한다.",
+      "skin": { "stem": "#E8F1DA", "leaf": "#6DB65F", "leafShape": "round" },
+      "defaultTip": "키트 설명서의 물 주기 방법을 따라주세요."
+    }
+  ],
+  "mismatchLabels": {
+    "radish": "무순",
+    "red_radish": "적무순",
+    "broccoli": "브로콜리 새싹",
+    "dachae": "다채 새싹",
+    "bokchoy": "청경채 새싹",
+    "wheatgrass": "밀싹",
+    "barley": "보리싹",
+    "other": "다른 새싹"
+  },
+  "moldGuide": {
+    "title": "하얀 게 보이나요?",
+    "steps": [
+      "분무기로 하얀 부분에 물을 살짝 뿌려보세요.",
+      "바로 숨이 죽어 사라지면 뿌리털이에요. 건강하다는 뜻이에요.",
+      "물을 뿌려도 그대로 남아 있거나, 끈적이거나, 냄새가 나면 곰팡이일 수 있어요.",
+      "곰팡이라면 먹지 말고 새로 시작해요. 처음 키우는 사람 누구나 겪는 일이에요."
+    ]
+  },
+  "issues": {
+    "none": { "label": "문제 없음" },
+    "root_hair": { "label": "뿌리털", "message": "하얀 솜털은 뿌리털이에요. 잘 자라고 있다는 뜻이에요." },
+    "mold_suspected": { "label": "곰팡이 의심", "message": "곰팡이인지 한 번 확인해볼까요?", "showMoldGuide": true },
+    "dry": { "label": "마름", "message": "조금 목이 마른 것 같아요. 물을 갈아줄까요?" },
+    "too_wet": { "label": "물이 많음", "message": "물이 고여 있으면 살짝 따라내 주세요." },
+    "yellowing": { "label": "노란 잎", "message": "빛이 부족하면 잎이 노래질 수 있어요. 창가로 옮겨볼까요?" },
+    "leggy": { "label": "웃자람", "message": "줄기가 길게 늘어났다면 빛이 더 필요하다는 신호예요." },
+    "uneven_germination": { "label": "고르지 않은 발아", "message": "싹이 나는 속도는 씨앗마다 달라요. 조금 더 기다려봐요." },
+    "not_a_sprout": { "label": "새싹 아님", "message": "새싹이 잘 보이게 다시 찍어볼까요?" },
+    "unclear_photo": { "label": "사진 불분명", "message": "조금 더 밝은 곳에서 찍으면 잘 보여요." }
+  }
+}

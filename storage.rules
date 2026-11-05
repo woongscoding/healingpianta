@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// HealingPianta Storage 보안 규칙 (초안, CLAUDE.md 4절)
+// - 본인 경로만, image/* 만, 5MB 이하.
+// - 그 밖의 경로는 모두 거부.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /users/{uid}/plants/{plantId}/{photoFile} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size <= 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}

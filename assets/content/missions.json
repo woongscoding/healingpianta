@@ -1,0 +1,76 @@
+{
+  "version": 1,
+  "note": "minEnergy는 이 미션을 제안할 수 있는 최소 에너지(1 낮음, 2 보통, 3 괜찮음). time이 비어 있으면 언제든 가능. late_night에는 sleep 사다리와 plantPair 일부만 제안한다.",
+  "rest": { "id": "rest", "text": "오늘은 쉬기", "description": "쉬는 것도 돌봄이에요" },
+  "ladders": [
+    {
+      "id": "space",
+      "label": "공간",
+      "category": "space",
+      "steps": [
+        { "id": "space_1", "step": 1, "text": "컵 하나만 싱크대로 옮기기", "minEnergy": 1, "minutes": 1, "time": ["morning", "afternoon", "evening"] },
+        { "id": "space_2", "step": 2, "text": "바닥에 있는 물건 5개만 제자리에", "minEnergy": 2, "minutes": 3, "time": ["morning", "afternoon", "evening"] },
+        { "id": "space_3", "step": 3, "text": "쓰레기 한 봉지 묶어서 문 앞에 두기", "minEnergy": 2, "minutes": 3, "time": ["morning", "afternoon", "evening"] },
+        { "id": "space_4", "step": 4, "text": "책상 위만 정리하기", "minEnergy": 2, "minutes": 5, "time": ["morning", "afternoon", "evening"] },
+        { "id": "space_5", "step": 5, "text": "이불 펴서 정리하기", "minEnergy": 3, "minutes": 3, "time": ["morning", "afternoon"] },
+        { "id": "space_6", "step": 6, "text": "타이머 10분 맞추고 방 정리하기", "minEnergy": 3, "minutes": 10, "time": ["morning", "afternoon", "evening"] }
+      ]
+    },
+    {
+      "id": "body",
+      "label": "몸",
+      "category": "body",
+      "steps": [
+        { "id": "body_1", "step": 1, "text": "물 한 컵 마시기", "minEnergy": 1, "minutes": 1, "time": [] },
+        { "id": "body_2", "step": 2, "text": "창가에서 햇볕 3분 쬐기", "minEnergy": 1, "minutes": 3, "time": ["morning", "afternoon"] },
+        { "id": "body_3", "step": 3, "text": "제자리에서 기지개 1분", "minEnergy": 1, "minutes": 1, "time": ["morning", "afternoon", "evening"] },
+        { "id": "body_4", "step": 4, "text": "세수하기", "minEnergy": 2, "minutes": 2, "time": ["morning", "afternoon", "evening"] },
+        { "id": "body_5", "step": 5, "text": "집 앞까지 5분 걷기", "minEnergy": 2, "minutes": 5, "time": ["morning", "afternoon"] },
+        { "id": "body_6", "step": 6, "text": "10분 산책하기", "minEnergy": 3, "minutes": 10, "time": ["morning", "afternoon"] }
+      ]
+    },
+    {
+      "id": "meal",
+      "label": "식사",
+      "category": "body",
+      "steps": [
+        { "id": "meal_1", "step": 1, "text": "물이나 따뜻한 차 한 잔", "minEnergy": 1, "minutes": 2, "time": [] },
+        { "id": "meal_2", "step": 2, "text": "간식 하나라도 먹기", "minEnergy": 1, "minutes": 3, "time": ["morning", "afternoon", "evening"] },
+        { "id": "meal_3", "step": 3, "text": "한 끼 챙겨 먹기", "minEnergy": 2, "minutes": 15, "time": ["morning", "afternoon", "evening"] },
+        { "id": "meal_4", "step": 4, "text": "키운 새싹 올려서 한 끼 먹기", "minEnergy": 2, "minutes": 15, "time": ["morning", "afternoon", "evening"], "requires": "harvested" }
+      ]
+    },
+    {
+      "id": "connection",
+      "label": "관계",
+      "category": "connection",
+      "steps": [
+        { "id": "conn_1", "step": 1, "text": "누군가에게 이모티콘 하나 보내기", "minEnergy": 1, "minutes": 1, "time": ["morning", "afternoon", "evening"] },
+        { "id": "conn_2", "step": 2, "text": "안부 한 줄 보내기", "minEnergy": 2, "minutes": 2, "time": ["morning", "afternoon", "evening"] },
+        { "id": "conn_3", "step": 3, "text": "새싹 사진 한 장 누군가에게 보내기", "minEnergy": 2, "minutes": 2, "time": ["morning", "afternoon", "evening"] },
+        { "id": "conn_4", "step": 4, "text": "짧게 통화하기", "minEnergy": 3, "minutes": 5, "time": ["afternoon", "evening"] },
+        { "id": "conn_5", "step": 5, "text": "만날 약속 하나 잡기", "minEnergy": 3, "minutes": 5, "time": ["afternoon", "evening"] }
+      ]
+    },
+    {
+      "id": "sleep",
+      "label": "잠",
+      "category": "sleep",
+      "steps": [
+        { "id": "sleep_1", "step": 1, "text": "내일 아침 알람 하나 맞추기", "minEnergy": 1, "minutes": 1, "time": ["evening", "late_night"] },
+        { "id": "sleep_2", "step": 2, "text": "휴대폰 내려놓고 눕기", "minEnergy": 1, "minutes": 1, "time": ["late_night"] },
+        { "id": "sleep_3", "step": 3, "text": "불 끄기 30분 전에 휴대폰 멀리 두기", "minEnergy": 2, "minutes": 1, "time": ["evening"] },
+        { "id": "sleep_4", "step": 4, "text": "내일 입을 옷 하나 꺼내두기", "minEnergy": 2, "minutes": 2, "time": ["evening"] }
+      ]
+    }
+  ],
+  "plantPair": [
+    { "id": "pair_water", "text": "새싹 물 갈 때 나도 물 한 컵", "minEnergy": 1, "minutes": 2, "category": "plant", "time": ["morning", "afternoon", "evening"] },
+    { "id": "pair_sun", "text": "새싹을 창가로 옮기면서 나도 햇볕 3분", "minEnergy": 1, "minutes": 3, "category": "plant", "time": ["morning", "afternoon"] },
+    { "id": "pair_photo_window", "text": "새싹 사진 찍고 창문 잠깐 열기", "minEnergy": 1, "minutes": 2, "category": "plant", "time": ["morning", "afternoon"] },
+    { "id": "pair_look", "text": "새싹 얼굴 한 번 보고 오기", "minEnergy": 1, "minutes": 1, "category": "plant", "time": [] },
+    { "id": "pair_wash", "text": "새싹 물 갈고 나도 세수하기", "minEnergy": 2, "minutes": 3, "category": "plant", "time": ["morning", "evening"] },
+    { "id": "pair_desk", "text": "새싹 자리 주변만 치우기", "minEnergy": 2, "minutes": 3, "category": "plant", "time": ["morning", "afternoon", "evening"] },
+    { "id": "pair_goodnight", "text": "새싹에게 잘 자 인사하고 불 끄기", "minEnergy": 1, "minutes": 1, "category": "plant", "time": ["late_night"] }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "note": "후보 상품이다. 직접 키워본 뒤 verified를 true로 바꾼다. partnerUrl은 사용자가 쿠팡 파트너스에서 직접 발급해 Remote Config(kit_partner_urls)에 넣는다. 가격은 바뀔 수 있어 앱에는 표시하지 않는다.",
+  "disclosureKey": "coupangDisclosure",
+  "kits": [
+    {
+      "id": "kit_brassica_4",
+      "name": "새싹 채소 키우기 4종 세트",
+      "description": "무순, 브로콜리, 다채, 청경채를 한 번에 키워볼 수 있어요.",
+      "species": ["radish", "broccoli", "dachae", "bokchoy"],
+      "productUrl": "https://www.coupang.com/vp/products/9337605271",
+      "partnerUrl": "",
+      "verified": false,
+      "recommended": true
+    },
+    {
+      "id": "kit_radish_ez",
+      "name": "무순 새싹 키우기 세트",
+      "description": "가장 빨리 자라는 무순으로 가볍게 시작해요.",
+      "species": ["radish"],
+      "productUrl": "https://www.coupang.com/vp/products/9571944536",
+      "partnerUrl": "",
+      "verified": false,
+      "recommended": false
+    }
+  ],
+  "ownKit": {
+    "id": "kit_own",
+    "name": "이미 가진 씨앗이나 키트",
+    "description": "가지고 있는 새싹 씨앗으로 시작해요. 종류를 직접 골라주세요.",
+    "species": ["radish", "red_radish", "broccoli", "dachae", "bokchoy", "other"]
+  },
+  "refill": {
+    "note": "씨앗 한 봉지로 키울 수 있는 횟수는 키트마다 다르다. 기본값으로 3챕터마다 리필 알림을 제안하고, 사용자가 설정에서 끌 수 있다.",
+    "defaultChaptersPerPack": 3
+  }
+}
