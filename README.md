@@ -3,6 +3,9 @@
 실제 새싹채소를 키우며 아주 작은 행동을 돕는 셀프케어 앱(웰니스 앱, 의료기기 아님).
 설계 기준은 [CLAUDE.md](CLAUDE.md)에 있다. 작업 전에 반드시 읽는다.
 
+- 새 PC에서 시작하기 / Firebase 만들기: [docs/SETUP.md](docs/SETUP.md)
+- 진행 상황: [docs/PROGRESS.md](docs/PROGRESS.md)
+
 ## 개발 환경
 
 | 도구 | 버전 / 위치 |
