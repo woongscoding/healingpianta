@@ -62,6 +62,25 @@ void main() {
       expect(content.missions.rest.id, 'rest');
     });
 
+    test('missions.json — 가치와 준비 행동 (임시 초안)', () {
+      final m = content.missions;
+      expect(m.values.map((v) => v.id), ['health', 'outdoors', 'connection', 'space', 'rest', 'growth', 'joy']);
+      expect(m.onboardingValues.map((v) => v.id), ['health', 'outdoors', 'connection', 'space', 'rest']);
+      expect(m.valueById('growth')!.hiddenInOnboarding, isTrue);
+      expect(m.valueById('joy')!.hiddenInOnboarding, isTrue);
+      expect(m.valueById('health')!.label, '건강');
+      expect(m.missionById('body_1')!.values, ['health']);
+      expect(m.missionById('conn_3')!.values, ['connection', 'joy']);
+      expect(m.prep, isNotEmpty);
+      final cup = m.missionById('prep_cup')!;
+      expect(cup.isPrep, isTrue);
+      expect(cup.isPlantPair, isFalse);
+      expect(m.allMissions.any((x) => x.isPrep), isFalse); // 일반 제안에는 섞지 않음
+      expect(m.valuesStatus, 'draft_needs_expert_review');
+      expect(m.prepStatus, 'draft_needs_expert_review');
+      expect(m.valueTagsStatus, 'draft_needs_expert_review');
+    });
+
     test('messages.json', () {
       final m = content.messages;
       expect(m.contexts, contains('return_after_absence'));
@@ -131,6 +150,14 @@ void main() {
       expect(() => AppContent.fromSources(src), throwsA(isA<ContentFormatException>()));
     });
 
+    test('미션에 values 가 없으면 오류', () {
+      final src = patched('missions.json', (j) => (j['plantPair'] as List).first.remove('values'));
+      expect(
+        () => AppContent.fromSources(src),
+        throwsA(isA<ContentFormatException>().having((e) => e.path, 'path', r'$.plantPair[0].values')),
+      );
+    });
+
     test('JSON 문법 오류', () {
       final src = {...readSources(), 'kits.json': '{ "version": 1, '};
       expect(
@@ -196,6 +223,42 @@ void main() {
     test('사다리 단계 건너뜀', () {
       final src = patched('missions.json', (j) => ((j['ladders'] as List).first['steps'] as List).removeAt(1));
       expect(errorsOf(src), contains(contains('step 은 1부터 차례로')));
+    });
+
+    test('알 수 없는 가치', () {
+      final src = patched('missions.json', (j) => (j['plantPair'] as List).first['values'] = ['wealth']);
+      expect(errorsOf(src), contains(contains('알 수 없는 가치 wealth')));
+    });
+
+    test('온보딩 가치에 에너지 1 미션이 없음', () {
+      // connection 의 에너지 1 미션은 conn_1 하나뿐
+      final src = patched('missions.json', (j) {
+        final conn = (j['ladders'] as List).firstWhere((l) => l['id'] == 'connection');
+        (conn['steps'] as List).first['minEnergy'] = 2;
+      });
+      expect(errorsOf(src), contains(contains('가치 connection 에 minEnergy 1 미션이 없음')));
+    });
+
+    test('숨긴 가치는 에너지 1 미션 검사에서 빠짐', () {
+      final src = patched('missions.json', (j) {
+        final items = j['values']['items'] as List;
+        items.add({'id': 'calm', 'label': '고요', 'description': '조용한 시간', 'hiddenInOnboarding': true});
+      });
+      expect(errorsOf(src), isEmpty);
+    });
+
+    test('준비 행동에 에너지 1 행동이 없음', () {
+      final src = patched('missions.json', (j) {
+        for (final p in j['prep']['items'] as List) {
+          p['minEnergy'] = 2;
+        }
+      });
+      expect(errorsOf(src), contains(contains('prep 에 minEnergy 1 행동이 없음')));
+    });
+
+    test('준비 행동 id 가 미션 id 와 중복', () {
+      final src = patched('missions.json', (j) => (j['prep']['items'] as List).first['id'] = 'body_1');
+      expect(errorsOf(src), contains(contains('"body_1" 중복')));
     });
 
     test('id 중복', () {
