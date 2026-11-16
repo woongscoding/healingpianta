@@ -167,3 +167,4 @@
 
 - **`docs/proposals/README.md`의 "절차":** "제안서 PR → 저장소 주인 검토 → 별도 PR로 CLAUDE.md 반영"으로 되어 있다. D-14(당분간 로컬 개발, 세부 결정은 사용자)와 맞지 않는다.
 - **`docs/PROGRESS.md`:** "Phase 2 — Firebase 프로젝트 대기", "공개 저장소"로 되어 있다. D-16(가짜 데이터로 Phase 2 진행 가능), D-14(로컬 개발)와 맞지 않는다.
+- **결과물 공유 시 Flutter 버전(3.47.9) 안내:** 지금 개발 PC는 Flutter 3.47.9(stable)로 고정되어 있다(CLAUDE.md 11절). 결과물을 GitHub에 올려 공유할 때 받는 사람이 같은 버전을 쓰도록 안내한다.
